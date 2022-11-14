@@ -3,10 +3,10 @@ import clsx from "clsx";
 import Link from "next/link";
 import Image, { ImageProps } from "next/image";
 import HomeBlueIcon from "../icons/home-blue.svg";
-import AgendaBlueIcon from "../icons/agenda-blue.svg";
+import MapBlueIcon from "../icons/map-blue.svg";
 import ExhibitorBlueIcon from "../icons/exhibitors-blue.svg";
 import HomeDarkIcon from "../icons/home-dark.svg";
-import AgendaDarkIcon from "../icons/agenda-dark.svg";
+import MapDarkIcon from "../icons/map-dark.svg";
 import ExhibitorDarkIcon from "../icons/exhibitors-dark.svg";
 import { usePathname } from "next/navigation";
 
@@ -62,21 +62,21 @@ export const Nav = () => {
       isActive: (pathname) => pathname === "/",
     },
     {
-      href: "/agenda",
-      icon: AgendaDarkIcon,
-      activeIcon: AgendaBlueIcon,
-      label: "Agenda",
-      isActive: (pathname) => pathname.startsWith("/agenda"),
+      href: "/map",
+      icon: MapDarkIcon,
+      activeIcon: MapBlueIcon,
+      label: "Map",
+      isActive: (pathname) => pathname.startsWith("/map"),
     },
   ];
 
   return (
-    <nav className="fixed bottom-0 w-full border-t border-slate-200 bg-white px-2 py-1">
-      <ul className="flex flex-row justify-center gap-1 py-0.5">
+    <nav className="fixed bottom-0 w-full border-t border-slate-200 bg-white px-4 py-1">
+      <ul className="flex flex-row justify-around gap-1 py-0.5">
         {links.map((link) => {
           const isActive = link.isActive(pathname);
           return (
-            <li key={link.href}>
+            <li key={link.href} className="w-20">
               <NavLink href={link.href} isActive={isActive}>
                 <Image
                   src={isActive ? link.activeIcon : link.icon}

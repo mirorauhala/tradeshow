@@ -13,5 +13,6 @@ type GridIconProps = {
 };
 
 export const GridIcon = ({ icon }: GridIconProps) => {
-  return createElement(icons[icon]);
+  const Icon = createElement(icons[icon]);
+  return Icon;
 };

@@ -6,7 +6,7 @@ const auth = `Bearer ${process.env.STRAPI_API_KEY}`;
 
 const Exhibitors = async () => {
   const exhibitors = await (
-    await fetch(`${baseUrl}/api/foods?populate=*`, {
+    await fetch(`${baseUrl}/api/exhibitors?populate=*`, {
       headers: {
         Authorization: auth,
       },
