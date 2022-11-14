@@ -13,13 +13,7 @@ export const FaqAccordion = ({ attributes }: FAQInterface) => {
 
     return (
         <div>
-            <button className='accordion-button relative
-            items-center justify-between inline-flex
-            w-full py-2 px-3
-            text-lg text-black text-left
-            rounded-xl
-            bg-gray-200
-            webkit-link'
+            <button className='accordion-button relative items-center justify-between inline-flex w-full py-2 px-3 text-lg text-black text-left rounded-xl bg-gray-200 webkit-link'
             onClick={() => setIsOpen(!isOpen)}>
                 <p className="mr-5">{question}</p>
                 <span className={`rotate-${isOpen ? '180' : '0'}`}><AccordionArrow/> </span>
