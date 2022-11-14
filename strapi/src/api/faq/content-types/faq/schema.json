@@ -13,10 +13,12 @@
   "pluginOptions": {},
   "attributes": {
     "question": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "answer": {
-      "type": "text"
+      "type": "text",
+      "required": true
     }
   }
 }
