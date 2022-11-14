@@ -10,7 +10,7 @@ const FAQs = async () => {
         <div>
             <Heading><p className='text-4xl'>FAQs</p></Heading>
             <Grid>
-                {faqs.data.length &&
+                {faqs.data.length > 0 &&
                     faqs.data.map((item: FAQInterface) => (
                         <div key={item.id}>
                             <FaqAccordion attributes={item.attributes} />
