@@ -1,25 +1,25 @@
-import { Grid, GridItem } from "@/components/Grid";
-import { Heading } from "@/components/Heading";
+import { Grid, GridItem, GridIcon } from "@/components/Grid";
+import { Heading } from "@/components";
+import { GridItems, HomeText } from "@/services";
 
-const Home = () => {
+const Home = async () => {
+  const [homeText, gridItems] = await Promise.all([HomeText(), GridItems()]);
+
   return (
     <div>
-      <Heading>Home</Heading>
+      <Heading>{homeText}</Heading>
 
       <main>
         <Grid>
-          <GridItem href={"/"} color="red">
-            Arriving to the venue
-          </GridItem>
-          <GridItem href={"/"} color="green">
-            Catering & food
-          </GridItem>
-          <GridItem href={"/"} color="yellow">
-            Arriving to the venue
-          </GridItem>
-          <GridItem href={"/"} color="blue">
-            Catering & food
-          </GridItem>
+          {gridItems.data.length > 0 &&
+            gridItems.data.map((item) => (
+              <GridItem key={item.id} href={"/exhibitors"}>
+                {item.attributes.icon && (
+                  <GridIcon icon={item.attributes.icon} />
+                )}
+                {item.attributes.name}
+              </GridItem>
+            ))}
         </Grid>
       </main>
     </div>

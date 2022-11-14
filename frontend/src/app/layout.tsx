@@ -1,5 +1,6 @@
 import "@fontsource/inter/variable.css";
 import { Nav } from "../components/Nav";
+import { AppBar } from "@/components";
 import "../styles/globals.css";
 
 export default function RootLayout({
@@ -14,6 +15,7 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body className="bg-slate-50">
+        <AppBar />
         <div className="px-5 pt-11">{children}</div>
         <Nav />
       </body>
