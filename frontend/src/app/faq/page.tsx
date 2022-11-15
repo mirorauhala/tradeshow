@@ -8,9 +8,7 @@ const FAQs = async () => {
 
   return (
     <div>
-      <Heading>
-        <p className="text-4xl">FAQs</p>
-      </Heading>
+      <Heading>FAQs</Heading>
       <Grid>
         {faqs.data.length > 0 &&
           faqs.data.map((item: FAQInterface) => (

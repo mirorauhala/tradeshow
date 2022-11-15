@@ -10,7 +10,9 @@ const Home = async () => {
 
   return (
     <div>
-      <Heading>{homeText}</Heading>
+      <Heading>
+        <p className="text-2xl">{homeText}</p>
+      </Heading>
 
       <main>
         <Grid>
