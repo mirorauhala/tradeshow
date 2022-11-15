@@ -1,3 +1,4 @@
-export * from "./HomeText";
-export * from "./GridItems";
-export * from "./FAQ";
+export * from "./getHomeText";
+export * from "./getGridItems";
+export * from "./getFaqs";
+export * from "./getExhibitors";

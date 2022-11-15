@@ -1,27 +1,27 @@
-import { Heading } from "@/components/Heading";
+import { Heading } from "@/components";
 import Image from "next/image";
-
-const baseUrl = "http://localhost:1337";
-const auth = `Bearer ${process.env.STRAPI_API_KEY}`;
+import { getExhibitors } from "@/services";
 
 const Exhibitors = async () => {
-  const exhibitors = await (
-    await fetch(`${baseUrl}/api/exhibitors?populate=*`, {
-      headers: {
-        Authorization: auth,
-      },
-    })
-  ).json();
+  const exhibitors = await getExhibitors();
 
   return (
     <>
       <Heading>Exhibitors</Heading>
       <pre>
-        {exhibitors.data.map((exhibitor) => {
+        {exhibitors.map((exhibitor) => {
           return (
             <div key={exhibitor.id}>
               <p>{exhibitor.attributes.name}</p>
-              <img src={exhibitor.attributes.image_url} alt="img" />
+              <Image
+                src={
+                  process.env.STRAPI_ENDPOINT_URL +
+                  exhibitor.attributes.logo.data.attributes.url
+                }
+                alt="img"
+                width={100}
+                height={100}
+              />
               <p>{exhibitor.attributes.location}</p>
             </div>
           );

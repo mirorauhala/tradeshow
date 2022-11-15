@@ -15,7 +15,7 @@
     "name": {
       "type": "string"
     },
-    "logo_url": {
+    "logo": {
       "type": "media",
       "multiple": false,
       "required": false,

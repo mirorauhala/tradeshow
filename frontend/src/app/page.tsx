@@ -1,9 +1,12 @@
 import { Grid, GridItem, GridIcon } from "@/components/Grid";
 import { Heading } from "@/components";
-import { GridItems, HomeText } from "@/services";
+import { getGridItems, getHomeText } from "@/services";
 
 const Home = async () => {
-  const [homeText, gridItems] = await Promise.all([HomeText(), GridItems()]);
+  const [homeText, gridItems] = await Promise.all([
+    getHomeText(),
+    getGridItems(),
+  ]);
 
   return (
     <div>
