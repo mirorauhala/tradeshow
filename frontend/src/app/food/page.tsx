@@ -1,4 +1,5 @@
 import { Heading } from "@/components";
+import Image from "next/image";
 
 const baseUrl = "http://localhost:1337";
 const auth = `Bearer ${process.env.STRAPI_API_KEY}`;
@@ -18,16 +19,29 @@ const Food = async () => {
       <pre>
         {food.data.map((foodItem) => {
           return (
-            <div key={foodItem.id} className=" flex flex-row m">
+            <div key={foodItem.id} className=" m flex flex-row">
               <div className=" m-2">
-                <img className=" object-cover h-20 w-20 rounded-xl border-2 border-black" src={foodItem.attributes?.image_url ? foodItem.attributes.image_url : "https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM="} alt="img" />
+                <img
+                  className=" h-20 w-20 rounded-xl border-2 border-black object-cover"
+                  src={
+                    foodItem.attributes?.image_url
+                      ? foodItem.attributes.image_url
+                      : "https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM="
+                  }
+                  alt="img"
+                />
               </div>
               <div className=" m-2">
-                <a className=" underline" href={foodItem.attributes?.restaurantUrl}>{foodItem.attributes.name}</a>
-                {foodItem.attributes.location && <p>location: {foodItem.attributes.location}</p>}
+                <a
+                  className=" underline"
+                  href={foodItem.attributes?.restaurantUrl}
+                >
+                  {foodItem.attributes.name}
+                </a>
+                {foodItem.attributes.location && (
+                  <p>location: {foodItem.attributes.location}</p>
+                )}
               </div>
-              
-              
             </div>
           );
         })}

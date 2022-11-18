@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "map_links",
+  "info": {
+    "singularName": "map-link",
+    "pluralName": "map-links",
+    "displayName": "Map_link",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "location": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "name_url": {
+      "type": "string"
+    },
+    "map": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::map.map",
+      "inversedBy": "map_links"
+    }
+  }
+}
