@@ -4,7 +4,8 @@
   "info": {
     "singularName": "program",
     "pluralName": "programs",
-    "displayName": "Program"
+    "displayName": "Program",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -12,10 +13,12 @@
   "pluginOptions": {},
   "attributes": {
     "start_time": {
-      "type": "time"
+      "type": "time",
+      "required": true
     },
     "name": {
-      "type": "string"
+      "type": "string",
+      "required": true
     }
   }
 }
