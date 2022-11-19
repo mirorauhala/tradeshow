@@ -1,17 +1,29 @@
 import { Grid, GridItem, GridIcon } from "@/components/Grid";
 import { Heading } from "@/components";
-import { getGridItems, getHomeText } from "@/services";
+import { getGridItems, getHomeTexts } from "@/services";
 
 const Home = async () => {
-  const [homeText, gridItems] = await Promise.all([
-    getHomeText(),
+  const [homeTexts, gridItems] = await Promise.all([
+    getHomeTexts(),
     getGridItems(),
   ]);
+  // voi kokeilla 'en' tai 'de'
+  const lang = "en";
 
   return (
     <div>
       <Heading>
-        <p className="text-2xl">{homeText}</p>
+        {homeTexts ? (
+          <p className="text-2xl">
+            {
+              homeTexts.filter(
+                (hometext) => hometext.attributes.language === lang
+              )[0].attributes.top_text
+            }
+          </p>
+        ) : (
+          ""
+        )}
       </Heading>
 
       <main>

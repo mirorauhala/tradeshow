@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * home controller
+ * home-text controller
  */
 
 const { createCoreController } = require('@strapi/strapi').factories;
 
-module.exports = createCoreController('api::home.home');
+module.exports = createCoreController('api::home-text.home-text');

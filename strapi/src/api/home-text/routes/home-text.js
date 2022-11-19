@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * home router
+ * home-text router
  */
 
 const { createCoreRouter } = require('@strapi/strapi').factories;
 
-module.exports = createCoreRouter('api::home.home');
+module.exports = createCoreRouter('api::home-text.home-text');

@@ -1,4 +1,4 @@
-export * from "./getHomeText";
+export * from "./getHomeTexts";
 export * from "./getGridItems";
 export * from "./getFaqs";
 export * from "./getExhibitors";
