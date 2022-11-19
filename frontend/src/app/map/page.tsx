@@ -15,8 +15,16 @@ const Map = async () => {
           <MapItem key={mapitem.id}>
             <div className="flex flex-row justify-between">
               <p className="text-2xl">{mapitem.attributes.name}</p>
-              {/* Surround with download link */}
-              <DownloadIcon />
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href={
+                  process.env.STRAPI_ENDPOINT_URL +
+                  mapitem.attributes.pdf_url.data.attributes.url
+                }
+              >
+                <DownloadIcon />
+              </a>
             </div>
             {mapitem.attributes.image_url.data !== null && (
               <div className="mt-4">
