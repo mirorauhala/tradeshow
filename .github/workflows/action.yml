@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - "main"
+
+
+jobs:
+  deploy:
+    name: "Sync repos"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.1.0
+      - run: |
+          rm -rf .git
+
+      - name: "Commit: frontend"
+        uses: actions/checkout@v3
+        with:
+          repository: mirorauhala/trade-front
+          path: deploy-frontend
+          token: ${{ secrets.GH_PAT }}
+      - run: |
+          rsync -av --delete --exclude=.git testing-front/ deploy-frontend/
+          cd deploy-frontend
+          date > generated.txt
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "Sync: $(date +"%Y-%m-%dT%H:%M:%S")"
+          git push
+
+      - name: "Commit: backend"
+        uses: actions/checkout@v3
+        with:
+          repository: mirorauhala/trade-back
+          path: deploy-backend
+          token: ${{ secrets.GH_PAT }}
+      - run: |
+          rsync -av --delete --exclude=.git testing-back/ deploy-backend/
+          cd deploy-backend
+          date > generated.txt
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "Sync: $(date +"%Y-%m-%dT%H:%M:%S")"
+          git push
+
+      - name: MISC
+        run: |
+          pwd
+          tree .
