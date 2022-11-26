@@ -20,15 +20,18 @@ const Food = async () => {
         {food.data.map((foodItem) => {
           return (
             <div key={foodItem.id} className=" m flex flex-row">
-              <div className=" m-2">
-                <img
-                  className=" h-20 w-20 rounded-xl border-2 border-black object-cover"
+              <div className=" m-2 min-w-[80px]">
+                <Image
                   src={
-                    foodItem.attributes?.image_url
-                      ? foodItem.attributes.image_url
-                      : "https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM="
+                    foodItem.attributes?.restaurant_image?.data?.attributes?.url
+                      ? process.env.STRAPI_ENDPOINT_URL +
+                        foodItem.attributes.restaurant_image.data.attributes.url
+                      : "https://via.placeholder.com/150"
                   }
                   alt="img"
+                  className=" h-20 w-20 rounded-xl border-2 border-black object-cover"
+                  width={80}
+                  height={80}
                 />
               </div>
               <div className=" m-2">

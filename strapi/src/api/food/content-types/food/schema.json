@@ -14,16 +14,25 @@
   "attributes": {
     "name": {
       "type": "string",
-      "required": true
+      "required": true,
+      "unique": true
     },
     "location": {
       "type": "string"
     },
-    "image_url": {
-      "type": "string"
-    },
     "restaurantUrl": {
       "type": "string"
+    },
+    "restaurant_image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     }
   }
 }

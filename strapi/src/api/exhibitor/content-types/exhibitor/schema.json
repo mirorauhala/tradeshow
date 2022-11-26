@@ -13,7 +13,9 @@
   "pluginOptions": {},
   "attributes": {
     "name": {
-      "type": "string"
+      "type": "string",
+      "required": true,
+      "unique": true
     },
     "logo": {
       "type": "media",
@@ -34,6 +36,9 @@
     },
     "description": {
       "type": "text"
+    },
+    "exhibitor_url": {
+      "type": "string"
     }
   }
 }
