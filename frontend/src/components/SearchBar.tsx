@@ -1,8 +1,25 @@
 
 
+interface SearchBarProps {
+  defaultList: any[];
+  setFilteredArray: (sortableArray: any[]) => void;
+}
 
 
-const SearchBar = (props) => {
+const SearchBar = (props: SearchBarProps) => {
+
+
+  const { defaultList, setFilteredArray } = props;
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const filteredArray = defaultList.filter((item) => {
+      return item.attributes.name
+        .toLowerCase()
+        .includes(event.target.value.toLowerCase());
+    });
+    setFilteredArray(filteredArray);
+  };
+
   return (
     <div className="rounded-xl border-2 border-black p-2 flex flex-row items-center bg-white">
       <svg
@@ -20,7 +37,7 @@ const SearchBar = (props) => {
         />
       </svg>
 
-      <input className="p-2 focus:outline-none" placeholder="Search"></input>
+      <input className="p-2 focus:outline-none" placeholder="Search" onChange={handleChange}></input>
     </div>
   );
 };
