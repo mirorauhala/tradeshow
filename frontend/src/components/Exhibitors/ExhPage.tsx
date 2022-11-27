@@ -15,7 +15,6 @@ const ExhPage = (props: ExhibitorsProps) => {
     const { exhibitors } = props;
 
     const [exhibitorsList, setExhibitorsList] = useState(exhibitors);
-
   return (
     <>
       <SearchBar defaultList={exhibitors} setFilteredArray={setExhibitorsList}  />
@@ -31,7 +30,7 @@ const ExhPage = (props: ExhibitorsProps) => {
                 <Image
                   src={
                     exhibitor.attributes?.logo?.data?.attributes?.url
-                      ? process.env.STRAPI_ENDPOINT_URL +
+                      ? process.env.NEXT_PUBLIC_STRAPI_ENDPOINT_URL +
                         exhibitor.attributes.logo.data.attributes.url
                       : logo
                   }
