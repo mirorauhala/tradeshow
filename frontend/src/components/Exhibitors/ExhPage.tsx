@@ -45,6 +45,7 @@ const ExhPage = (props: ExhibitorsProps) => {
                   <a
                     className=" underline"
                     href={exhibitor.attributes?.exhibitor_url}
+                    target="_blank"
                   >
                     {exhibitor.attributes.name}
                   </a>
