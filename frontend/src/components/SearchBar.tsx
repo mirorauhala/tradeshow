@@ -37,7 +37,7 @@ const SearchBar = (props: SearchBarProps) => {
         />
       </svg>
 
-      <input className="p-2 focus:outline-none" placeholder="Search" onChange={handleChange}></input>
+      <input className="p-2 w-11/12 focus:outline-none" placeholder="Search" onChange={handleChange}></input>
     </div>
   );
 };
