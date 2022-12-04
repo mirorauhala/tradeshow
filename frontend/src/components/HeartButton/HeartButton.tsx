@@ -1,16 +1,37 @@
-'use client';
+"use client";
 
-import {useState} from 'react';
+import { useState, useEffect } from "react";
 
 const HeartButton = (props) => {
+  const { exhibitor, onClick, showFavourites } = props;
   const [selected, setSelected] = useState(false);
+  const [favourites, setFavourites] = useState(false);
 
-  const onClick = () => {
-    setSelected(!selected);
-  }
+  useEffect(() => {
+    if (exhibitor) {
+      if (exhibitor.liked) {
+        setSelected(true);
+      } else {
+        setSelected(false);
+      }
+    }
+  }, []);
+
+  const handleClick = () => {
+    if (onClick && exhibitor) {
+      onClick(exhibitor, selected);
+      setSelected(!selected);
+    }
+    if (showFavourites) {
+      showFavourites(!favourites);
+      setFavourites(!favourites);
+      setSelected(!selected);
+    }
+  };
+
   return (
     <>
-      <button onClick={onClick}>
+      <button onClick={handleClick}>
         {!selected ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
