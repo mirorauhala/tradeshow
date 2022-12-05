@@ -13,6 +13,6 @@ module.exports = {
   rules: {
     "@typescript-eslint/consistent-type-imports": "warn",
     "react/react-in-jsx-scope": "off",
-    "no-console": "error",
+    "no-console": ["error", { allow: ["warn", "error"] }],
   },
 };

@@ -1,6 +1,6 @@
 import { Heading } from "@/components";
 import { Grid } from "@/components/Grid";
-import { getProgram, ProgramInterface } from "@/services";
+import { getProgram, type ProgramInterface } from "@/services";
 
 const Program = async () => {
   const program = await getProgram();

@@ -2,7 +2,6 @@ import { Heading } from "@/components";
 import ExhPage from "@/components/Exhibitors/ExhPage";
 import { getExhibitors } from "@/services";
 
-
 const Exhibitors = async () => {
   const exhibitors = await getExhibitors();
   exhibitors.sort((a, b) => {
@@ -13,7 +12,7 @@ const Exhibitors = async () => {
     <>
       <Heading>Exhibitors</Heading>
       <ExhPage exhibitors={exhibitors} />
-     </>
+    </>
   );
 };
 

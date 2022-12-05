@@ -20,9 +20,9 @@ const Food = async () => {
       <pre>
         {food.data.map((foodItem) => {
           return (
-            <div className=" bg-gray-200 rounded-xl p-2 m-2" >
-              <div key={foodItem.id} className=" m flex flex-row">
-                <div className=" m-2 min-w-[80px]">
+            <div key={foodItem.id} className="m-2 rounded-xl bg-gray-200 p-2">
+              <div className="flex flex-row">
+                <div className="m-2 min-w-[80px]">
                   <Image
                     src={
                       foodItem.attributes?.restaurant_image?.data?.attributes
@@ -33,16 +33,15 @@ const Food = async () => {
                         : logo
                     }
                     alt="img"
-                    className=" h-20 w-20 rounded-xl border-2 border-black object-cover"
-                    width={80}
-                    height={80}
+                    className="h-20 w-20 rounded-xl border-2 border-black object-cover"
                   />
                 </div>
-                <div className=" m-2">
+                <div className="m-2">
                   <a
-                    className=" underline"
+                    className="underline"
                     href={foodItem.attributes?.restaurantUrl}
                     target="_blank"
+                    rel="noreferrer"
                   >
                     {foodItem.attributes.name}
                   </a>

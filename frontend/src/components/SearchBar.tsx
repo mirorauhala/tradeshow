@@ -1,34 +1,26 @@
-
+import { type ChangeEvent } from "react";
 
 interface SearchBarProps {
-  defaultList: any[];
-  setFilteredArray: (sortableArray: any[]) => void;
+  // eslint-disable-next-line no-unused-vars
+  handleChange: (value: string) => void;
 }
 
-
 const SearchBar = (props: SearchBarProps) => {
+  const { handleChange } = props;
 
-
-  const { defaultList, setFilteredArray } = props;
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const filteredArray = defaultList.filter((item) => {
-      return item.attributes.name
-        .toLowerCase()
-        .includes(event.target.value.toLowerCase());
-    });
-    setFilteredArray(filteredArray);
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+    handleChange(event.target.value);
   };
 
   return (
-    <div className="rounded-xl border-2 border-black p-2 flex flex-row items-center bg-white">
+    <div className="flex flex-row items-center rounded-xl border-2 border-black bg-white">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className="h-6 w-6 m-2"
+        className="m-2 h-6 w-6"
       >
         <path
           strokeLinecap="round"
@@ -37,7 +29,11 @@ const SearchBar = (props: SearchBarProps) => {
         />
       </svg>
 
-      <input className="p-2 w-11/12 focus:outline-none" placeholder="Search" onChange={handleChange}></input>
+      <input
+        className="w-full rounded-xl py-3 placeholder:text-slate-500 focus:outline-none"
+        placeholder="Search"
+        onChange={onChange}
+      />
     </div>
   );
 };
