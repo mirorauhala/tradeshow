@@ -52,21 +52,51 @@ const ExhPage = (props: ExhibitorsProps) => {
   };
 
   useEffect(() => {
-    console.log(exhibitorsList);
+    exhibitorsList.forEach((exhibitor) => {
+      exhibitor.liked = JSON.parse(
+        localStorage.getItem(exhibitor.attributes.name)
+      );
+    });
   }, [exhibitorsList]);
 
-  const handleLiked = (exhibitor: any) => {
+  const handleLiked = (exhibitor: any, state: boolean) => {
     console.log("liked", exhibitor);
     let tempExhibitor = exhibitor;
+    tempExhibitor.liked = state;
     let tempExhibitorsList = exhibitorsList;
+    console.log("marko", tempExhibitor.liked);
     if (!tempExhibitor.liked) {
       tempExhibitor = { ...tempExhibitor, liked: true };
+      localStorage.setItem(
+        exhibitor.attributes.name,
+        JSON.stringify(tempExhibitor.liked)
+      );
     } else {
       tempExhibitor = { ...tempExhibitor, liked: false };
+      console.log("else", tempExhibitor.liked);
+      localStorage.setItem(
+        exhibitor.attributes.name,
+        JSON.stringify(tempExhibitor.liked)
+      );
     }
-    const index = tempExhibitorsList.findIndex((exh) => exh.id === tempExhibitor.id);
+    const index = tempExhibitorsList.findIndex(
+      (exh) => exh.id === tempExhibitor.id
+    );
     tempExhibitorsList[index] = tempExhibitor;
     setExhibitorsList(tempExhibitorsList);
+    console.log("asdas", tempExhibitor);
+  };
+
+  const showFavourites = (state) => {
+    console.log("show favourites");
+    let sortedArray = [...exhibitorsList];
+    if (state) {
+      sortedArray = exhibitorsList.filter((exh) => exh.liked);
+    } else {
+      sortedArray = exhibitors;
+    }
+    const sortedArray2 = [...sortedArray];
+    setExhibitorsList(sortedArray2);
   };
 
   return (
@@ -89,7 +119,7 @@ const ExhPage = (props: ExhibitorsProps) => {
       </div>
       <div className=" flex flex-row justify-center text-center">
         <p className="m-2">show only my favourites</p>
-        <HeartButton className="m-2" />
+        <HeartButton showFavourites={showFavourites} className="m-2" />
       </div>
       <pre className=" min-w-min">
         {exhibitorsList.map((exhibitor) => {
@@ -120,7 +150,8 @@ const ExhPage = (props: ExhibitorsProps) => {
                   </a>
                   <HeartButton
                     className="m-2"
-                    onClick={() => handleLiked(exhibitor)}
+                    onClick={handleLiked}
+                    exhibitor={exhibitor}
                   />
                 </div>
                 {exhibitor.attributes?.industry_type && (
