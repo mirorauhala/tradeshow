@@ -3,7 +3,7 @@ import { client } from "@/support/client";
 
 interface ProgramResponse{
     id?: number;
-    attributes: { start_time: string; end_time: string; name: string; };
+    attributes: { start_time: string; end_time?: string; name: string; };
 }
 export interface ProgramInterface {
     id?: number;
