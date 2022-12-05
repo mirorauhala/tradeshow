@@ -2,12 +2,9 @@ import "@fontsource/inter/variable.css";
 import { Nav } from "../components/Nav";
 import { AppBar } from "@/components";
 import "../styles/globals.css";
+import { type ReactNode } from "react";
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="de">
       <head>

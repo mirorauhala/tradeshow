@@ -1,7 +1,7 @@
 import { Heading } from "@/components";
 import { FaqAccordion } from "@/components/FaqAccordion/FaqAccordion";
 import { Grid } from "@/components/Grid";
-import { getFaqs, FAQInterface } from "@/services";
+import { getFaqs, type FAQInterface } from "@/services";
 
 const FAQs = async () => {
   const faqs = await getFaqs();

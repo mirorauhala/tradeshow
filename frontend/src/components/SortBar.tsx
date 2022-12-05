@@ -1,22 +1,9 @@
 interface SearchBarProps {
-  defaultList: any[];
-  setFilteredArray: (sortableArray: any[]) => void;
-  sortByAlphabet: () => void;
-  sortByIndustry: () => void;
+  // eslint-disable-next-line no-unused-vars
+  onSort: (type: "alphabet" | "industry") => void;
 }
 
-const SortBar = (props: SearchBarProps) => {
-  const { defaultList, setFilteredArray, sortByAlphabet, sortByIndustry } =
-    props;
-
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    if (event.target.value === "alphabet") {
-      sortByAlphabet();
-    } else if (event.target.value === "industry") {
-      sortByIndustry();
-    }
-  };
-
+const SortBar = ({ onSort }: SearchBarProps) => {
   return (
     <div className="flex flex-row items-center rounded-xl border-2 border-black bg-white p-2">
       <svg
@@ -35,9 +22,11 @@ const SortBar = (props: SearchBarProps) => {
       </svg>
 
       <select
-        className=" w-11/12 p-2 focus:outline-none"
+        className="w-11/12 p-2 focus:outline-none"
         placeholder="Sort"
-        onChange={(event) => handleChange(event)}
+        onChange={(event) =>
+          onSort(event?.target.value as "alphabet" | "industry")
+        }
       >
         <option value="alphabet">By alphabet</option>
         <option value="industry">By industry</option>

@@ -1,7 +1,7 @@
 "use client";
 import clsx from "clsx";
 import Link from "next/link";
-import Image, { ImageProps } from "next/image";
+import Image, { type ImageProps } from "next/image";
 import HomeBlueIcon from "../icons/home-blue.svg";
 import MapBlueIcon from "../icons/map-blue.svg";
 import ExhibitorBlueIcon from "../icons/exhibitors-blue.svg";
@@ -9,6 +9,7 @@ import HomeDarkIcon from "../icons/home-dark.svg";
 import MapDarkIcon from "../icons/map-dark.svg";
 import ExhibitorDarkIcon from "../icons/exhibitors-dark.svg";
 import { usePathname } from "next/navigation";
+import { type ReactNode } from "react";
 
 const NavLink = ({
   isActive,
@@ -17,7 +18,7 @@ const NavLink = ({
 }: {
   isActive?: boolean;
   href: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }) => {
   return (
     <Link
@@ -40,6 +41,7 @@ type LinkType = {
   icon: ImageProps["src"];
   activeIcon: ImageProps["src"];
   label: string;
+  // eslint-disable-next-line no-unused-vars
   isActive: (pathname: string) => boolean;
 };
 
@@ -74,7 +76,7 @@ export const Nav = () => {
     <nav className="fixed bottom-0 w-full border-t border-slate-200 bg-white px-4 py-1">
       <ul className="flex flex-row justify-around gap-1 py-0.5">
         {links.map((link) => {
-          const isActive = link.isActive(pathname);
+          const isActive = pathname ? link.isActive(pathname) : false;
           return (
             <li key={link.href} className="w-20">
               <NavLink href={link.href} isActive={isActive}>
