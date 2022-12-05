@@ -18,8 +18,11 @@ export async function getProgram() {
         return {
             id: program.id,
             name: program.attributes.name,
-            startTime: program.attributes.start_time.substring(0, program.attributes.start_time.indexOf(':', program.attributes.start_time.indexOf(':') + 1)) + `${program.attributes.end_time ? ' - ' + program.attributes.end_time.substring(0, program.attributes.end_time.indexOf(':', program.attributes.end_time.indexOf(':') + 1)) : ''}`,
+            startTime: stripTime(program.attributes.start_time) + `${program.attributes.end_time ? ' - ' + stripTime(program.attributes.end_time) : ''}`,
         }})
         .sort((a: ProgramInterface, b: ProgramInterface) => a.startTime.localeCompare(b.startTime));
 
 }
+
+
+const stripTime = (time: string) => time.substring(0, time.indexOf(':', time.indexOf(':') + 1));
