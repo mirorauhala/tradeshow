@@ -9,11 +9,7 @@
 const config = {
   reactStrictMode: true,
   swcMinify: true,
-  i18n: {
-    locales: ["de"],
-    defaultLocale: "de",
-  },
-  experimental: { appDir: true },
+  output: "standalone",
   images: {
     remotePatterns: [
       {

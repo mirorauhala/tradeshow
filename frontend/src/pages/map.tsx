@@ -2,12 +2,29 @@ import { Heading, MapItem } from "@/components";
 import { getMaps } from "@/services";
 import Image from "next/image";
 import { DownloadIcon } from "@/components/Map";
+import Head from "next/head";
+import Layout from "@/components/Layout";
 
-const Map = async () => {
+type MapProps = {
+  maps: any;
+};
+
+export async function getServerSideProps() {
   const maps = await getMaps();
 
+  return {
+    props: {
+      maps,
+    } as MapProps,
+  };
+}
+
+const Map = ({ maps }: MapProps) => {
   return (
-    <>
+    <Layout>
+      <Head>
+        <title>Map - WeAssist</title>
+      </Head>
       <Heading>Map</Heading>
 
       {maps.length > 0 &&
@@ -60,7 +77,7 @@ const Map = async () => {
             )}
           </MapItem>
         ))}
-    </>
+    </Layout>
   );
 };
 

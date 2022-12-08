@@ -1,5 +1,5 @@
 .DS_Store
-
+strapi-data/**/*
 # Local .terraform directories
 **/.terraform/*
 

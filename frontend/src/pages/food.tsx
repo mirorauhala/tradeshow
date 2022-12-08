@@ -1,21 +1,35 @@
 import { Heading } from "@/components";
 import Image from "next/image";
 import logo from "@/images/logo.png";
+import Head from "next/head";
+import Layout from "@/components/Layout";
 
-const baseUrl = "http://localhost:1337";
-const auth = `Bearer ${process.env.STRAPI_API_KEY}`;
+type FoodProps = {
+  food: any;
+};
 
-const Food = async () => {
+export const getServerSideProps = async () => {
   const food = await (
-    await fetch(`${baseUrl}/api/foods?populate=*`, {
+    await fetch(`${process.env.STRAPI_ENDPOINT_URL}/api/foods?populate=*`, {
       headers: {
-        Authorization: auth,
+        Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
       },
     })
   ).json();
 
+  return {
+    props: {
+      food,
+    } as FoodProps,
+  };
+};
+
+const Food = ({ food }: FoodProps) => {
   return (
-    <>
+    <Layout>
+      <Head>
+        <title>Food - WeAssist</title>
+      </Head>
       <Heading>Food</Heading>
       <pre>
         {food.data.map((foodItem) => {
@@ -59,7 +73,7 @@ const Food = async () => {
           );
         })}
       </pre>
-    </>
+    </Layout>
   );
 };
 

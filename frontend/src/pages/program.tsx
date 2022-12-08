@@ -1,12 +1,28 @@
 import { Heading } from "@/components";
 import { Grid } from "@/components/Grid";
 import { getProgram, type ProgramInterface } from "@/services";
+import Head from "next/head";
 
-const Program = async () => {
+type ProgramProps = {
+  program: any;
+};
+
+export async function getServerSideProps() {
   const program = await getProgram();
 
+  return {
+    props: {
+      program,
+    } as ProgramProps,
+  };
+}
+
+const Program = ({ program }: ProgramProps) => {
   return (
     <div>
+      <Head>
+        <title>Program - WeAssist</title>
+      </Head>
       <Heading>Program</Heading>
       <Grid>
         {program.length > 0 &&

@@ -11,6 +11,48 @@ jobs:
     name: "Sync repos"
     runs-on: ubuntu-latest
     steps:
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH_KEY" > ~/.ssh/prod.key
+          echo "$SSH_HOST_KEY" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/*
+          cat >>~/.ssh/config <<END
+          Host prod
+            HostName $SSH_HOST
+            User $SSH_USER
+            IdentityFile ~/.ssh/prod.key
+            StrictHostKeyChecking yes
+          END
+        env:
+          SSH_USER: ${{ secrets.DEPLOY_SSH_USER }}
+          SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          SSH_HOST: ${{ secrets.DEPLOY_SSH_HOST }}
+          SSH_HOST_KEY: ${{ secrets.DEPLOY_SSH_HOST_KEY }}
+
+      - name: Login to Container registry
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | \
+            docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+
+      - uses: actions/checkout@v3.1.0
+      - name: Build frontend image
+        run: |
+          docker build frontend --file Dockerfile --tag ghcr.io/mirorauhala/trade-front:latest
+          docker push ghcr.io/mirorauhala/trade-front:latest
+
+      - uses: actions/checkout@v3.1.0
+      - name: Build backend image
+        run: |
+          docker build strapi --file Dockerfile --tag ghcr.io/mirorauhala/trade-back:latest
+          docker push ghcr.io/mirorauhala/trade-back:latest
+
+      - name: Login to Container registry on prod
+        run: ssh prod 'echo "${{ secrets.GITHUB_TOKEN }}" | sudo docker login ghcr.io -u "${{ github.actor }}" --password-stdin'
+
+      - name: Start app
+        run: ssh prod 'cd app && touch githubwashere'
+
       - name: Checkout
         uses: actions/checkout@v3.1.0
       - run: |
